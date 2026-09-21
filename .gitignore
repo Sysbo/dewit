@@ -1,0 +1,14 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Docker volumes / runtime data
+/data/
+/uploads/
+
+# IDE
+.idea/
+
+# OS
+.DS_Store
