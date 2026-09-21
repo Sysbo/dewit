@@ -1,0 +1,5392 @@
+version: 1
+directus: 11.14.0
+vendor: postgres
+collections:
+  - collection: artist
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: artist
+      color: null
+      display_template: '{{name}}'
+      group: null
+      hidden: false
+      icon: palette
+      item_duplication_fields: null
+      note: Tapestry artists
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: artist
+  - collection: bprelationship
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: bprelationship
+      color: null
+      display_template: '{{businesspartnerid.name}} – {{relationtypeid.name}}'
+      group: null
+      hidden: false
+      icon: handshake
+      item_duplication_fields: null
+      note: Relations between business partners and relation types
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: bprelationship
+  - collection: businesspartner
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: businesspartner
+      color: null
+      display_template: '{{name}}'
+      group: null
+      hidden: false
+      icon: business
+      item_duplication_fields: null
+      note: 'Business partners: customers, suppliers, self, ...'
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: businesspartner
+  - collection: catalogue
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: catalogue
+      color: null
+      display_template: '{{name}}'
+      group: null
+      hidden: false
+      icon: menu_book
+      item_duplication_fields: null
+      note: Catalogues
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: catalogue
+  - collection: cataloguepresence
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: cataloguepresence
+      color: null
+      display_template: '{{catalogueid.name}} – {{tapestryid.inventorynumber}}'
+      group: null
+      hidden: false
+      icon: playlist_add_check
+      item_duplication_fields: null
+      note: Presence of a tapestry in one or many catalogues
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: cataloguepresence
+  - collection: cleaning
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: cleaning
+      color: null
+      display_template: '{{tapestryid.inventorynumber}} – {{datecleaning}}'
+      group: null
+      hidden: false
+      icon: cleaning_services
+      item_duplication_fields: null
+      note: Tapestry cleaning history
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: cleaning
+  - collection: location
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: location
+      color: null
+      display_template: '{{name}}'
+      group: null
+      hidden: false
+      icon: place
+      item_duplication_fields: null
+      note: Place where a tapestry is located, specific to a business partner
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: location
+  - collection: orientation
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: orientation
+      color: null
+      display_template: '{{name}}'
+      group: null
+      hidden: false
+      icon: screen_rotation
+      item_duplication_fields: null
+      note: Tapestry orientation
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: orientation
+  - collection: ownership
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: ownership
+      color: null
+      display_template: '{{tapestryid.inventorynumber}} – {{ownerid.name}}'
+      group: null
+      hidden: false
+      icon: key
+      item_duplication_fields: null
+      note: Tapestry ownership history
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: ownership
+  - collection: picture
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: picture
+      color: null
+      display_template: '{{name}}'
+      group: null
+      hidden: false
+      icon: image
+      item_duplication_fields: null
+      note: Pictures
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: picture
+  - collection: relationtype
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: relationtype
+      color: null
+      display_template: '{{name}}'
+      group: null
+      hidden: false
+      icon: label
+      item_duplication_fields: null
+      note: 'Types of relation: Customer, Tentative Customer, Supplier, Self'
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: relationtype
+  - collection: salesinformation
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: salesinformation
+      color: null
+      display_template: '{{tapestryid.inventorynumber}}'
+      group: null
+      hidden: false
+      icon: sell
+      item_duplication_fields: null
+      note: Information on tapestries that are for sale
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: salesinformation
+  - collection: sublocation
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: sublocation
+      color: null
+      display_template: '{{description}}'
+      group: null
+      hidden: false
+      icon: pin_drop
+      item_duplication_fields: null
+      note: Sub-location within a location
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: sublocation
+  - collection: tapestry
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: tapestry
+      color: null
+      display_template: '{{inventorynumber}} – {{titleen}}'
+      group: null
+      hidden: false
+      icon: texture
+      item_duplication_fields: null
+      note: Tapestry entity
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: tapestry
+  - collection: tapestrylocation
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: tapestrylocation
+      color: null
+      display_template: '{{tapestryid.inventorynumber}} – {{locationid.name}}'
+      group: null
+      hidden: false
+      icon: map
+      item_duplication_fields: null
+      note: Locations of tapestries over time
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: tapestrylocation
+  - collection: tapestrypicture
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: tapestrypicture
+      color: null
+      display_template: '{{tapestryid.inventorynumber}} – {{pictureid.name}}'
+      group: null
+      hidden: false
+      icon: photo_library
+      item_duplication_fields: null
+      note: Pictures attached to tapestries
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: tapestrypicture
+fields:
+  - collection: artist
+    field: id
+    type: integer
+    meta:
+      collection: artist
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: artist
+      data_type: integer
+      default_value: nextval('artist_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: artist
+    field: name
+    type: text
+    meta:
+      collection: artist
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: name
+      table: artist
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: artist
+    field: period
+    type: text
+    meta:
+      collection: artist
+      conditions: null
+      display: null
+      display_options: null
+      field: period
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: period
+      table: artist
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: artist
+    field: tapestries
+    type: alias
+    meta:
+      collection: artist
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      field: tapestries
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: bprelationship
+    field: id
+    type: integer
+    meta:
+      collection: bprelationship
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: bprelationship
+      data_type: integer
+      default_value: nextval('bprelationship_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: bprelationship
+    field: relationtypeid
+    type: integer
+    meta:
+      collection: bprelationship
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: relationtypeid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: relationtypeid
+      table: bprelationship
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: relationtype
+      foreign_key_column: id
+  - collection: bprelationship
+    field: businesspartnerid
+    type: integer
+    meta:
+      collection: bprelationship
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: businesspartnerid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: businesspartnerid
+      table: bprelationship
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+  - collection: businesspartner
+    field: id
+    type: integer
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: businesspartner
+      data_type: integer
+      default_value: nextval('businesspartner_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: businesspartner
+    field: name
+    type: text
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: name
+      table: businesspartner
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: businesspartner
+    field: addressstreet
+    type: text
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: null
+      display_options: null
+      field: addressstreet
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: addressstreet
+      table: businesspartner
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: businesspartner
+    field: addressnr
+    type: text
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: null
+      display_options: null
+      field: addressnr
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: addressnr
+      table: businesspartner
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: businesspartner
+    field: addresscountry
+    type: text
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: null
+      display_options: null
+      field: addresscountry
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: addresscountry
+      table: businesspartner
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: businesspartner
+    field: addresstown
+    type: text
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: null
+      display_options: null
+      field: addresstown
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: addresstown
+      table: businesspartner
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: businesspartner
+    field: active
+    type: boolean
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: null
+      display_options: null
+      field: active
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: active
+      table: businesspartner
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: businesspartner
+    field: relationships
+    type: alias
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{businesspartnerid.name}} – {{relationtypeid.name}}'
+      field: relationships
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: businesspartner
+    field: locations
+    type: alias
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: locations
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: businesspartner
+    field: ownerships
+    type: alias
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{ownerid.name}}'
+      field: ownerships
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: businesspartner
+    field: sales_as_seller
+    type: alias
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}}'
+      field: sales_as_seller
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: businesspartner
+    field: sales_as_buyer
+    type: alias
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}}'
+      field: sales_as_buyer
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 5
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: businesspartner
+    field: tapestry_locations
+    type: alias
+    meta:
+      collection: businesspartner
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{locationid.name}}'
+      field: tapestry_locations
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: catalogue
+    field: id
+    type: integer
+    meta:
+      collection: catalogue
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: catalogue
+      data_type: integer
+      default_value: nextval('catalogue_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: catalogue
+    field: name
+    type: text
+    meta:
+      collection: catalogue
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: name
+      table: catalogue
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: catalogue
+    field: datestart
+    type: date
+    meta:
+      collection: catalogue
+      conditions: null
+      display: null
+      display_options: null
+      field: datestart
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: datestart
+      table: catalogue
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: catalogue
+    field: dateend
+    type: date
+    meta:
+      collection: catalogue
+      conditions: null
+      display: null
+      display_options: null
+      field: dateend
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: dateend
+      table: catalogue
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: catalogue
+    field: presences
+    type: alias
+    meta:
+      collection: catalogue
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{catalogueid.name}} – {{tapestryid.inventorynumber}}'
+      field: presences
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: cataloguepresence
+    field: id
+    type: integer
+    meta:
+      collection: cataloguepresence
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: cataloguepresence
+      data_type: integer
+      default_value: nextval('cataloguepresence_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: cataloguepresence
+    field: catalogueid
+    type: integer
+    meta:
+      collection: cataloguepresence
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: catalogueid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: catalogueid
+      table: cataloguepresence
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: catalogue
+      foreign_key_column: id
+  - collection: cataloguepresence
+    field: tapestryid
+    type: integer
+    meta:
+      collection: cataloguepresence
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      field: tapestryid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: tapestryid
+      table: cataloguepresence
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: tapestry
+      foreign_key_column: id
+  - collection: cataloguepresence
+    field: catalogprice
+    type: integer
+    meta:
+      collection: cataloguepresence
+      conditions: null
+      display: null
+      display_options: null
+      field: catalogprice
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: catalogprice
+      table: cataloguepresence
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: cleaning
+    field: id
+    type: integer
+    meta:
+      collection: cleaning
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: cleaning
+      data_type: integer
+      default_value: nextval('cleaning_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: cleaning
+    field: tapestryid
+    type: integer
+    meta:
+      collection: cleaning
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      field: tapestryid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: tapestryid
+      table: cleaning
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: tapestry
+      foreign_key_column: id
+  - collection: cleaning
+    field: datecleaning
+    type: date
+    meta:
+      collection: cleaning
+      conditions: null
+      display: null
+      display_options: null
+      field: datecleaning
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: datecleaning
+      table: cleaning
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: cleaning
+    field: comments
+    type: text
+    meta:
+      collection: cleaning
+      conditions: null
+      display: null
+      display_options: null
+      field: comments
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: comments
+      table: cleaning
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: location
+    field: id
+    type: integer
+    meta:
+      collection: location
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: location
+      data_type: integer
+      default_value: nextval('location_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: location
+    field: bpid
+    type: integer
+    meta:
+      collection: location
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: bpid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: bpid
+      table: location
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+  - collection: location
+    field: name
+    type: text
+    meta:
+      collection: location
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: name
+      table: location
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: location
+    field: countryinformation
+    type: text
+    meta:
+      collection: location
+      conditions: null
+      display: null
+      display_options: null
+      field: countryinformation
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: countryinformation
+      table: location
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: location
+    field: sublocations
+    type: alias
+    meta:
+      collection: location
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{description}}'
+      field: sublocations
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: location
+    field: tapestry_locations
+    type: alias
+    meta:
+      collection: location
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{locationid.name}}'
+      field: tapestry_locations
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: orientation
+    field: id
+    type: integer
+    meta:
+      collection: orientation
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: orientation
+      data_type: integer
+      default_value: nextval('orientation_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orientation
+    field: name
+    type: text
+    meta:
+      collection: orientation
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: name
+      table: orientation
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: orientation
+    field: tapestries
+    type: alias
+    meta:
+      collection: orientation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      field: tapestries
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: ownership
+    field: id
+    type: integer
+    meta:
+      collection: ownership
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: ownership
+      data_type: integer
+      default_value: nextval('ownership_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: ownership
+    field: ownerid
+    type: integer
+    meta:
+      collection: ownership
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: ownerid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: ownerid
+      table: ownership
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+  - collection: ownership
+    field: tapestryid
+    type: integer
+    meta:
+      collection: ownership
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      field: tapestryid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: tapestryid
+      table: ownership
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: tapestry
+      foreign_key_column: id
+  - collection: ownership
+    field: datestart
+    type: date
+    meta:
+      collection: ownership
+      conditions: null
+      display: null
+      display_options: null
+      field: datestart
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: datestart
+      table: ownership
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: ownership
+    field: dateend
+    type: date
+    meta:
+      collection: ownership
+      conditions: null
+      display: null
+      display_options: null
+      field: dateend
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: dateend
+      table: ownership
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: ownership
+    field: active
+    type: boolean
+    meta:
+      collection: ownership
+      conditions: null
+      display: null
+      display_options: null
+      field: active
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: active
+      table: ownership
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: picture
+    field: id
+    type: integer
+    meta:
+      collection: picture
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: picture
+      data_type: integer
+      default_value: nextval('picture_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: picture
+    field: path
+    type: text
+    meta:
+      collection: picture
+      conditions: null
+      display: null
+      display_options: null
+      field: path
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: path
+      table: picture
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: picture
+    field: mimetype
+    type: text
+    meta:
+      collection: picture
+      conditions: null
+      display: null
+      display_options: null
+      field: mimetype
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: mimetype
+      table: picture
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: picture
+    field: name
+    type: text
+    meta:
+      collection: picture
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: name
+      table: picture
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: picture
+    field: description
+    type: text
+    meta:
+      collection: picture
+      conditions: null
+      display: null
+      display_options: null
+      field: description
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description
+      table: picture
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: picture
+    field: descriptionauthor
+    type: text
+    meta:
+      collection: picture
+      conditions: null
+      display: null
+      display_options: null
+      field: descriptionauthor
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: descriptionauthor
+      table: picture
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: picture
+    field: tapestry_pictures
+    type: alias
+    meta:
+      collection: picture
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{pictureid.name}}'
+      field: tapestry_pictures
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: relationtype
+    field: id
+    type: integer
+    meta:
+      collection: relationtype
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: relationtype
+      data_type: integer
+      default_value: nextval('relationtype_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: relationtype
+    field: name
+    type: text
+    meta:
+      collection: relationtype
+      conditions: null
+      display: null
+      display_options: null
+      field: name
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: name
+      table: relationtype
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: relationtype
+    field: partner_relations
+    type: alias
+    meta:
+      collection: relationtype
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{businesspartnerid.name}} – {{relationtypeid.name}}'
+      field: partner_relations
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: salesinformation
+    field: id
+    type: integer
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: salesinformation
+      data_type: integer
+      default_value: nextval('salesinformation_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: salesinformation
+    field: seller
+    type: integer
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: seller
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: seller
+      table: salesinformation
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+  - collection: salesinformation
+    field: buyer
+    type: integer
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: buyer
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: buyer
+      table: salesinformation
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+  - collection: salesinformation
+    field: tapestryid
+    type: integer
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      field: tapestryid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: tapestryid
+      table: salesinformation
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: tapestry
+      foreign_key_column: id
+  - collection: salesinformation
+    field: minprice
+    type: float
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: null
+      display_options: null
+      field: minprice
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: minprice
+      table: salesinformation
+      data_type: double precision
+      default_value: null
+      max_length: null
+      numeric_precision: 53
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: salesinformation
+    field: transactiondate
+    type: date
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: null
+      display_options: null
+      field: transactiondate
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: transactiondate
+      table: salesinformation
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: salesinformation
+    field: saledatestart
+    type: date
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: null
+      display_options: null
+      field: saledatestart
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: saledatestart
+      table: salesinformation
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: salesinformation
+    field: active
+    type: boolean
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: null
+      display_options: null
+      field: active
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: active
+      table: salesinformation
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: salesinformation
+    field: transactionprice
+    type: float
+    meta:
+      collection: salesinformation
+      conditions: null
+      display: null
+      display_options: null
+      field: transactionprice
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: transactionprice
+      table: salesinformation
+      data_type: double precision
+      default_value: null
+      max_length: null
+      numeric_precision: 53
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: sublocation
+    field: id
+    type: integer
+    meta:
+      collection: sublocation
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: sublocation
+      data_type: integer
+      default_value: nextval('sublocation_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: sublocation
+    field: locationid
+    type: integer
+    meta:
+      collection: sublocation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: locationid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: locationid
+      table: sublocation
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: location
+      foreign_key_column: id
+  - collection: sublocation
+    field: description
+    type: text
+    meta:
+      collection: sublocation
+      conditions: null
+      display: null
+      display_options: null
+      field: description
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description
+      table: sublocation
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: sublocation
+    field: tapestry_locations
+    type: alias
+    meta:
+      collection: sublocation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{locationid.name}}'
+      field: tapestry_locations
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: tapestry
+    field: id
+    type: integer
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: tapestry
+      data_type: integer
+      default_value: nextval('tapestry_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: artist
+    type: integer
+    meta:
+      collection: tapestry
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: artist
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: artist
+      table: tapestry
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: artist
+      foreign_key_column: id
+  - collection: tapestry
+    field: orientation
+    type: integer
+    meta:
+      collection: tapestry
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: orientation
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: orientation
+      table: tapestry
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: orientation
+      foreign_key_column: id
+  - collection: tapestry
+    field: inventorynumber
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: inventorynumber
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: inventorynumber
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: type
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: type
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: type
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: century
+    type: integer
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: century
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: century
+      table: tapestry
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: date
+    type: date
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: date
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: date
+      table: tapestry
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: conservation
+    type: integer
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: conservation
+      group: null
+      hidden: false
+      interface: input
+      note: Date when tapestry was stored at manufactury (approx.)
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: conservation
+      table: tapestry
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: origin
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: origin
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: origin
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: height
+    type: float
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: height
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: height
+      table: tapestry
+      data_type: double precision
+      default_value: null
+      max_length: null
+      numeric_precision: 53
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: width
+    type: float
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: width
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: width
+      table: tapestry
+      data_type: double precision
+      default_value: null
+      max_length: null
+      numeric_precision: 53
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: surface
+    type: float
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: surface
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: surface
+      table: tapestry
+      data_type: double precision
+      default_value: null
+      max_length: null
+      numeric_precision: 53
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: fragment
+    type: boolean
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: fragment
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: fragment
+      table: tapestry
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: forsale
+    type: boolean
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: forsale
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: forsale
+      table: tapestry
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: velcro
+    type: boolean
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: velcro
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: velcro
+      table: tapestry
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: lining
+    type: boolean
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: lining
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: lining
+      table: tapestry
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: privatecollection
+    type: boolean
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: privatecollection
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: privatecollection
+      table: tapestry
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: definitivesize
+    type: boolean
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: definitivesize
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: definitivesize
+      table: tapestry
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: label
+    type: boolean
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: label
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: label
+      table: tapestry
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: edition
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: edition
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: edition
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: descriptionen
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: descriptionen
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: descriptionen
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: descriptionnl
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: descriptionnl
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: descriptionnl
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: descriptionfr
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: descriptionfr
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: descriptionfr
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: descriptionauthor
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: descriptionauthor
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: descriptionauthor
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: titleen
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: titleen
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: titleen
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: titlenl
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: titlenl
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: titlenl
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: titlefr
+    type: text
+    meta:
+      collection: tapestry
+      conditions: null
+      display: null
+      display_options: null
+      field: titlefr
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: titlefr
+      table: tapestry
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry
+    field: catalogue_presences
+    type: alias
+    meta:
+      collection: tapestry
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{catalogueid.name}} – {{tapestryid.inventorynumber}}'
+      field: catalogue_presences
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: tapestry
+    field: cleanings
+    type: alias
+    meta:
+      collection: tapestry
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{datecleaning}}'
+      field: cleanings
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: tapestry
+    field: ownerships
+    type: alias
+    meta:
+      collection: tapestry
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{ownerid.name}}'
+      field: ownerships
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: tapestry
+    field: sales
+    type: alias
+    meta:
+      collection: tapestry
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}}'
+      field: sales
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 4
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: tapestry
+    field: locations
+    type: alias
+    meta:
+      collection: tapestry
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{locationid.name}}'
+      field: locations
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 5
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: tapestry
+    field: pictures
+    type: alias
+    meta:
+      collection: tapestry
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{tapestryid.inventorynumber}} – {{pictureid.name}}'
+      field: pictures
+      group: null
+      hidden: false
+      interface: list-o2m
+      note: null
+      options:
+        enableCreate: true
+        enableSelect: true
+      readonly: false
+      required: false
+      searchable: true
+      sort: 6
+      special:
+        - o2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: tapestrylocation
+    field: id
+    type: integer
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: tapestrylocation
+      data_type: integer
+      default_value: nextval('tapestrylocation_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestrylocation
+    field: tapestryid
+    type: integer
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      field: tapestryid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: tapestryid
+      table: tapestrylocation
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: tapestry
+      foreign_key_column: id
+  - collection: tapestrylocation
+    field: businesspartnerid
+    type: integer
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: businesspartnerid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: businesspartnerid
+      table: tapestrylocation
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+  - collection: tapestrylocation
+    field: locationid
+    type: integer
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: locationid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: locationid
+      table: tapestrylocation
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: location
+      foreign_key_column: id
+  - collection: tapestrylocation
+    field: sublocationid
+    type: integer
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{description}}'
+      field: sublocationid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{description}}'
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: sublocationid
+      table: tapestrylocation
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: sublocation
+      foreign_key_column: id
+  - collection: tapestrylocation
+    field: active
+    type: boolean
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: null
+      display_options: null
+      field: active
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: active
+      table: tapestrylocation
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestrylocation
+    field: IN
+    type: date
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: null
+      display_options: null
+      field: IN
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: IN
+      table: tapestrylocation
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestrylocation
+    field: out
+    type: date
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: null
+      display_options: null
+      field: out
+      group: null
+      hidden: false
+      interface: datetime
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: out
+      table: tapestrylocation
+      data_type: date
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestrylocation
+    field: comments
+    type: text
+    meta:
+      collection: tapestrylocation
+      conditions: null
+      display: null
+      display_options: null
+      field: comments
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: comments
+      table: tapestrylocation
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestrypicture
+    field: id
+    type: integer
+    meta:
+      collection: tapestrypicture
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: tapestrypicture
+      data_type: integer
+      default_value: nextval('tapestrypicture_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestrypicture
+    field: tapestryid
+    type: integer
+    meta:
+      collection: tapestrypicture
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      field: tapestryid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{inventorynumber}} – {{titleen}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: tapestryid
+      table: tapestrypicture
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: tapestry
+      foreign_key_column: id
+  - collection: tapestrypicture
+    field: pictureid
+    type: integer
+    meta:
+      collection: tapestrypicture
+      conditions: null
+      display: related-values
+      display_options:
+        template: '{{name}}'
+      field: pictureid
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        template: '{{name}}'
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: pictureid
+      table: tapestrypicture
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: picture
+      foreign_key_column: id
+  - collection: tapestrypicture
+    field: active
+    type: boolean
+    meta:
+      collection: tapestrypicture
+      conditions: null
+      display: null
+      display_options: null
+      field: active
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: active
+      table: tapestrypicture
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestrypicture
+    field: dateinformation
+    type: text
+    meta:
+      collection: tapestrypicture
+      conditions: null
+      display: null
+      display_options: null
+      field: dateinformation
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: dateinformation
+      table: tapestrypicture
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestrypicture
+    field: uv
+    type: boolean
+    meta:
+      collection: tapestrypicture
+      conditions: null
+      display: null
+      display_options: null
+      field: uv
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: null
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: uv
+      table: tapestrypicture
+      data_type: boolean
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+systemFields:
+  - collection: directus_activity
+    field: timestamp
+    schema:
+      is_indexed: true
+  - collection: directus_revisions
+    field: parent
+    schema:
+      is_indexed: true
+relations:
+  - collection: bprelationship
+    field: businesspartnerid
+    related_collection: businesspartner
+    meta:
+      junction_field: null
+      many_collection: bprelationship
+      many_field: businesspartnerid
+      one_allowed_collections: null
+      one_collection: businesspartner
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: relationships
+      sort_field: null
+    schema:
+      table: bprelationship
+      column: businesspartnerid
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+      constraint_name: fk_bprelati_relationp_business
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: bprelationship
+    field: relationtypeid
+    related_collection: relationtype
+    meta:
+      junction_field: null
+      many_collection: bprelationship
+      many_field: relationtypeid
+      one_allowed_collections: null
+      one_collection: relationtype
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: partner_relations
+      sort_field: null
+    schema:
+      table: bprelationship
+      column: relationtypeid
+      foreign_key_table: relationtype
+      foreign_key_column: id
+      constraint_name: fk_bprelati_relationt_relation
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: cataloguepresence
+    field: catalogueid
+    related_collection: catalogue
+    meta:
+      junction_field: null
+      many_collection: cataloguepresence
+      many_field: catalogueid
+      one_allowed_collections: null
+      one_collection: catalogue
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: presences
+      sort_field: null
+    schema:
+      table: cataloguepresence
+      column: catalogueid
+      foreign_key_table: catalogue
+      foreign_key_column: id
+      constraint_name: fk_catalogu_hostingca_catalogu
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: cataloguepresence
+    field: tapestryid
+    related_collection: tapestry
+    meta:
+      junction_field: null
+      many_collection: cataloguepresence
+      many_field: tapestryid
+      one_allowed_collections: null
+      one_collection: tapestry
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: catalogue_presences
+      sort_field: null
+    schema:
+      table: cataloguepresence
+      column: tapestryid
+      foreign_key_table: tapestry
+      foreign_key_column: id
+      constraint_name: fk_catalogu_listedtap_tapestry
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: cleaning
+    field: tapestryid
+    related_collection: tapestry
+    meta:
+      junction_field: null
+      many_collection: cleaning
+      many_field: tapestryid
+      one_allowed_collections: null
+      one_collection: tapestry
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: cleanings
+      sort_field: null
+    schema:
+      table: cleaning
+      column: tapestryid
+      foreign_key_table: tapestry
+      foreign_key_column: id
+      constraint_name: fk_cleaning_tapestryc_tapestry
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: location
+    field: bpid
+    related_collection: businesspartner
+    meta:
+      junction_field: null
+      many_collection: location
+      many_field: bpid
+      one_allowed_collections: null
+      one_collection: businesspartner
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: locations
+      sort_field: null
+    schema:
+      table: location
+      column: bpid
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+      constraint_name: fk_location_bpid_loca_business
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: ownership
+    field: ownerid
+    related_collection: businesspartner
+    meta:
+      junction_field: null
+      many_collection: ownership
+      many_field: ownerid
+      one_allowed_collections: null
+      one_collection: businesspartner
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: ownerships
+      sort_field: null
+    schema:
+      table: ownership
+      column: ownerid
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+      constraint_name: fk_ownershi_bpownersh_business
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: ownership
+    field: tapestryid
+    related_collection: tapestry
+    meta:
+      junction_field: null
+      many_collection: ownership
+      many_field: tapestryid
+      one_allowed_collections: null
+      one_collection: tapestry
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: ownerships
+      sort_field: null
+    schema:
+      table: ownership
+      column: tapestryid
+      foreign_key_table: tapestry
+      foreign_key_column: id
+      constraint_name: fk_ownershi_tapestryo_tapestry
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: salesinformation
+    field: seller
+    related_collection: businesspartner
+    meta:
+      junction_field: null
+      many_collection: salesinformation
+      many_field: seller
+      one_allowed_collections: null
+      one_collection: businesspartner
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: sales_as_seller
+      sort_field: null
+    schema:
+      table: salesinformation
+      column: seller
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+      constraint_name: fk_salesinf_seller_business
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: salesinformation
+    field: buyer
+    related_collection: businesspartner
+    meta:
+      junction_field: null
+      many_collection: salesinformation
+      many_field: buyer
+      one_allowed_collections: null
+      one_collection: businesspartner
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: sales_as_buyer
+      sort_field: null
+    schema:
+      table: salesinformation
+      column: buyer
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+      constraint_name: fk_salesinf_buyer_business
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: salesinformation
+    field: tapestryid
+    related_collection: tapestry
+    meta:
+      junction_field: null
+      many_collection: salesinformation
+      many_field: tapestryid
+      one_allowed_collections: null
+      one_collection: tapestry
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: sales
+      sort_field: null
+    schema:
+      table: salesinformation
+      column: tapestryid
+      foreign_key_table: tapestry
+      foreign_key_column: id
+      constraint_name: fk_salesinf_sale_tapestry
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: sublocation
+    field: locationid
+    related_collection: location
+    meta:
+      junction_field: null
+      many_collection: sublocation
+      many_field: locationid
+      one_allowed_collections: null
+      one_collection: location
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: sublocations
+      sort_field: null
+    schema:
+      table: sublocation
+      column: locationid
+      foreign_key_table: location
+      foreign_key_column: id
+      constraint_name: fk_sublocat_sublocati_location
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: tapestry
+    field: artist
+    related_collection: artist
+    meta:
+      junction_field: null
+      many_collection: tapestry
+      many_field: artist
+      one_allowed_collections: null
+      one_collection: artist
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: tapestries
+      sort_field: null
+    schema:
+      table: tapestry
+      column: artist
+      foreign_key_table: artist
+      foreign_key_column: id
+      constraint_name: fk_tapestry_artist_artist
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: tapestry
+    field: orientation
+    related_collection: orientation
+    meta:
+      junction_field: null
+      many_collection: tapestry
+      many_field: orientation
+      one_allowed_collections: null
+      one_collection: orientation
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: tapestries
+      sort_field: null
+    schema:
+      table: tapestry
+      column: orientation
+      foreign_key_table: orientation
+      foreign_key_column: id
+      constraint_name: fk_tapestry_tapestryo_orientat
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: tapestrylocation
+    field: locationid
+    related_collection: location
+    meta:
+      junction_field: null
+      many_collection: tapestrylocation
+      many_field: locationid
+      one_allowed_collections: null
+      one_collection: location
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: tapestry_locations
+      sort_field: null
+    schema:
+      table: tapestrylocation
+      column: locationid
+      foreign_key_table: location
+      foreign_key_column: id
+      constraint_name: fk_tapestry_arealocat_location
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: tapestrylocation
+    field: businesspartnerid
+    related_collection: businesspartner
+    meta:
+      junction_field: null
+      many_collection: tapestrylocation
+      many_field: businesspartnerid
+      one_allowed_collections: null
+      one_collection: businesspartner
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: tapestry_locations
+      sort_field: null
+    schema:
+      table: tapestrylocation
+      column: businesspartnerid
+      foreign_key_table: businesspartner
+      foreign_key_column: id
+      constraint_name: fk_tapestry_businessp_business
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: tapestrylocation
+    field: tapestryid
+    related_collection: tapestry
+    meta:
+      junction_field: null
+      many_collection: tapestrylocation
+      many_field: tapestryid
+      one_allowed_collections: null
+      one_collection: tapestry
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: locations
+      sort_field: null
+    schema:
+      table: tapestrylocation
+      column: tapestryid
+      foreign_key_table: tapestry
+      foreign_key_column: id
+      constraint_name: fk_tapestry_tapestryl_tapestry
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: tapestrylocation
+    field: sublocationid
+    related_collection: sublocation
+    meta:
+      junction_field: null
+      many_collection: tapestrylocation
+      many_field: sublocationid
+      one_allowed_collections: null
+      one_collection: sublocation
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: tapestry_locations
+      sort_field: null
+    schema:
+      table: tapestrylocation
+      column: sublocationid
+      foreign_key_table: sublocation
+      foreign_key_column: id
+      constraint_name: fk_tapestry_tapestrys_sublocat
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: tapestrypicture
+    field: pictureid
+    related_collection: picture
+    meta:
+      junction_field: null
+      many_collection: tapestrypicture
+      many_field: pictureid
+      one_allowed_collections: null
+      one_collection: picture
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: tapestry_pictures
+      sort_field: null
+    schema:
+      table: tapestrypicture
+      column: pictureid
+      foreign_key_table: picture
+      foreign_key_column: id
+      constraint_name: fk_tapestry_pictureto_picture
+      on_update: RESTRICT
+      on_delete: RESTRICT
+  - collection: tapestrypicture
+    field: tapestryid
+    related_collection: tapestry
+    meta:
+      junction_field: null
+      many_collection: tapestrypicture
+      many_field: tapestryid
+      one_allowed_collections: null
+      one_collection: tapestry
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: pictures
+      sort_field: null
+    schema:
+      table: tapestrypicture
+      column: tapestryid
+      foreign_key_table: tapestry
+      foreign_key_column: id
+      constraint_name: fk_tapestry_tapestryt_tapestry
+      on_update: RESTRICT
+      on_delete: RESTRICT
