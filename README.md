@@ -110,3 +110,16 @@ docker compose exec -T database pg_dump \
   -F c -f /tmp/backup.dump
 docker compose cp database:/tmp/backup.dump backups/mon_backup.dump
 ```
+
+## Gestion future des images de tapisseries (`directus_files`)
+
+Pas encore implémenté : aucune photo n'a été importée à ce jour. La table `picture` (`path`, `mimetype`, `name`, `description`, `descriptionauthor`) sert actuellement de placeholder, liée à `tapestry` via `tapestrypicture`.
+
+Quand le dossier d'images sera disponible, les fichiers seront gérés par la collection système `directus_files` plutôt que par `picture`, pour bénéficier des miniatures et transformations à la volée, de la gestion des dossiers/permissions et des métadonnées automatiques (dimensions, poids, type MIME). Plan prévu :
+
+- **Suppression de `picture`** : ses colonnes `path`, `mimetype` et `name` deviennent redondantes — `directus_files` stocke déjà cette information nativement (`filename_disk`, `type`, `title`, `description`).
+- **Champ personnalisé sur `directus_files`** : `descriptionauthor` n'a pas d'équivalent natif ; il sera ajouté comme champ personnalisé sur `directus_files`.
+- **`tapestrypicture` conservée** comme table de liaison entre une tapisserie et un fichier, avec ses colonnes `active`, `dateinformation`, `uv`. Seule `pictureid` change de nature : elle passera d'un entier référençant `picture.id` à un UUID référençant `directus_files.id` (relation de type fichier). C'est ce qui permettra un champ « images » multiple sur `tapestry`, avec ces attributs propres à chaque image.
+- **Import** : un script enverra chaque fichier du dossier d'images via l'API Directus (`POST /files`) dans un dossier dédié, puis créera la ligne `tapestrypicture` correspondante en retrouvant la tapisserie via son `inventorynumber` (à faire correspondre au nom de fichier ou au sous-dossier — convention encore à définir, par exemple un suffixe `_uv` pour repérer les photos UV).
+
+Cette migration du schéma (SQL + snapshot Directus, voir [`Injecter une base de backup via Docker`](#injecter-une-base-de-backup-via-docker)) ne pourra se faire qu'une fois de vraies tapisseries importées, puisque l'association se fait par `inventorynumber`.
