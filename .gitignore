@@ -7,6 +7,9 @@
 /data/
 /uploads/
 
+# Extension dependencies (dist/ stays versioned: the stack has no build step)
+/extensions/*/node_modules/
+
 # IDE
 .idea/
 

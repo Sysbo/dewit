@@ -40,7 +40,7 @@ collections:
       color: null
       display_template: '{{businesspartnerid.name}} – {{relationtypeid.name}}'
       group: null
-      hidden: false
+      hidden: true
       icon: handshake
       item_duplication_fields: null
       note: Relations between business partners and relation types
@@ -90,7 +90,7 @@ collections:
       collapse: open
       collection: catalogue
       color: null
-      display_template: '{{name}}'
+      display_template: '{{name}} {{year}}'
       group: null
       hidden: false
       icon: menu_book
@@ -256,7 +256,7 @@ collections:
       singleton: false
       sort: null
       sort_field: null
-      status: active
+      status: inactive
       translations: null
       unarchive_value: null
       versioning: false
@@ -366,6 +366,32 @@ collections:
       versioning: false
     schema:
       name: tapestry
+  - collection: tapestry_files
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      autosave_revision_interval: null
+      collapse: open
+      collection: tapestry_files
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      preview_url: null
+      singleton: false
+      sort: null
+      sort_field: null
+      status: active
+      translations: null
+      unarchive_value: null
+      versioning: false
+    schema:
+      name: tapestry_files
   - collection: tapestrylocation
     meta:
       accountability: all
@@ -412,7 +438,7 @@ collections:
       singleton: false
       sort: null
       sort_field: null
-      status: active
+      status: inactive
       translations: null
       unarchive_value: null
       versioning: false
@@ -1230,7 +1256,7 @@ fields:
       note: null
       options: null
       readonly: false
-      required: true
+      required: false
       searchable: true
       sort: null
       special: null
@@ -1246,7 +1272,7 @@ fields:
       max_length: null
       numeric_precision: null
       numeric_scale: null
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: false
       is_primary_key: false
@@ -1270,7 +1296,7 @@ fields:
       note: null
       options: null
       readonly: false
-      required: true
+      required: false
       searchable: true
       sort: null
       special: null
@@ -1286,7 +1312,7 @@ fields:
       max_length: null
       numeric_precision: null
       numeric_scale: null
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: false
       is_primary_key: false
@@ -1322,6 +1348,46 @@ fields:
       validation: null
       validation_message: null
       width: full
+  - collection: catalogue
+    field: year
+    type: integer
+    meta:
+      collection: catalogue
+      conditions: null
+      display: null
+      display_options: null
+      field: year
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      searchable: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: year
+      table: catalogue
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: cataloguepresence
     field: id
     type: integer
@@ -2767,7 +2833,7 @@ fields:
       foreign_key_column: id
   - collection: salesinformation
     field: minprice
-    type: float
+    type: integer
     meta:
       collection: salesinformation
       conditions: null
@@ -2791,11 +2857,11 @@ fields:
     schema:
       name: minprice
       table: salesinformation
-      data_type: double precision
+      data_type: integer
       default_value: null
       max_length: null
-      numeric_precision: 53
-      numeric_scale: null
+      numeric_precision: 32
+      numeric_scale: 0
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -2928,7 +2994,7 @@ fields:
       foreign_key_column: null
   - collection: salesinformation
     field: transactionprice
-    type: float
+    type: integer
     meta:
       collection: salesinformation
       conditions: null
@@ -2952,11 +3018,11 @@ fields:
     schema:
       name: transactionprice
       table: salesinformation
-      data_type: double precision
+      data_type: integer
       default_value: null
       max_length: null
-      numeric_precision: 53
-      numeric_scale: null
+      numeric_precision: 32
+      numeric_scale: 0
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -3173,7 +3239,7 @@ fields:
       options:
         template: '{{name}}'
       readonly: false
-      required: true
+      required: false
       searchable: true
       sort: null
       special:
@@ -3190,7 +3256,7 @@ fields:
       max_length: null
       numeric_precision: 32
       numeric_scale: 0
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: true
       is_primary_key: false
@@ -3216,7 +3282,7 @@ fields:
       options:
         template: '{{name}}'
       readonly: false
-      required: true
+      required: false
       searchable: true
       sort: null
       special:
@@ -3233,7 +3299,7 @@ fields:
       max_length: null
       numeric_precision: 32
       numeric_scale: 0
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: true
       is_primary_key: false
@@ -3324,7 +3390,7 @@ fields:
       foreign_key_column: null
   - collection: tapestry
     field: century
-    type: integer
+    type: text
     meta:
       collection: tapestry
       conditions: null
@@ -3348,11 +3414,11 @@ fields:
     schema:
       name: century
       table: tapestry
-      data_type: integer
+      data_type: text
       default_value: null
       max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
+      numeric_precision: null
+      numeric_scale: null
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -3404,7 +3470,7 @@ fields:
       foreign_key_column: null
   - collection: tapestry
     field: conservation
-    type: integer
+    type: text
     meta:
       collection: tapestry
       conditions: null
@@ -3428,11 +3494,11 @@ fields:
     schema:
       name: conservation
       table: tapestry
-      data_type: integer
+      data_type: text
       default_value: null
       max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
+      numeric_precision: null
+      numeric_scale: null
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -3484,7 +3550,7 @@ fields:
       foreign_key_column: null
   - collection: tapestry
     field: height
-    type: float
+    type: decimal
     meta:
       collection: tapestry
       conditions: null
@@ -3508,11 +3574,11 @@ fields:
     schema:
       name: height
       table: tapestry
-      data_type: double precision
+      data_type: numeric
       default_value: null
       max_length: null
-      numeric_precision: 53
-      numeric_scale: null
+      numeric_precision: 8
+      numeric_scale: 2
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -3524,7 +3590,7 @@ fields:
       foreign_key_column: null
   - collection: tapestry
     field: width
-    type: float
+    type: decimal
     meta:
       collection: tapestry
       conditions: null
@@ -3548,11 +3614,11 @@ fields:
     schema:
       name: width
       table: tapestry
-      data_type: double precision
+      data_type: numeric
       default_value: null
       max_length: null
-      numeric_precision: 53
-      numeric_scale: null
+      numeric_precision: 8
+      numeric_scale: 2
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -3564,7 +3630,7 @@ fields:
       foreign_key_column: null
   - collection: tapestry
     field: surface
-    type: float
+    type: decimal
     meta:
       collection: tapestry
       conditions: null
@@ -3588,11 +3654,11 @@ fields:
     schema:
       name: surface
       table: tapestry
-      data_type: double precision
+      data_type: numeric
       default_value: null
       max_length: null
-      numeric_precision: 53
-      numeric_scale: null
+      numeric_precision: 10
+      numeric_scale: 2
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -3634,7 +3700,7 @@ fields:
       max_length: null
       numeric_precision: null
       numeric_scale: null
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: false
       is_primary_key: false
@@ -3671,7 +3737,7 @@ fields:
       name: forsale
       table: tapestry
       data_type: boolean
-      default_value: null
+      default_value: false
       max_length: null
       numeric_precision: null
       numeric_scale: null
@@ -3716,7 +3782,7 @@ fields:
       max_length: null
       numeric_precision: null
       numeric_scale: null
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: false
       is_primary_key: false
@@ -3757,7 +3823,7 @@ fields:
       max_length: null
       numeric_precision: null
       numeric_scale: null
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: false
       is_primary_key: false
@@ -3794,7 +3860,7 @@ fields:
       name: privatecollection
       table: tapestry
       data_type: boolean
-      default_value: null
+      default_value: false
       max_length: null
       numeric_precision: null
       numeric_scale: null
@@ -3839,7 +3905,7 @@ fields:
       max_length: null
       numeric_precision: null
       numeric_scale: null
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: false
       is_primary_key: false
@@ -3850,7 +3916,7 @@ fields:
       foreign_key_column: null
   - collection: tapestry
     field: label
-    type: boolean
+    type: text
     meta:
       collection: tapestry
       conditions: null
@@ -3859,15 +3925,14 @@ fields:
       field: label
       group: null
       hidden: false
-      interface: boolean
+      interface: input
       note: null
       options: null
       readonly: false
       required: false
       searchable: true
       sort: null
-      special:
-        - cast-boolean
+      special: null
       translations: null
       validation: null
       validation_message: null
@@ -3875,12 +3940,12 @@ fields:
     schema:
       name: label
       table: tapestry
-      data_type: boolean
+      data_type: text
       default_value: null
       max_length: null
       numeric_precision: null
       numeric_scale: null
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: false
       is_primary_key: false
@@ -3891,7 +3956,7 @@ fields:
       foreign_key_column: null
   - collection: tapestry
     field: edition
-    type: text
+    type: integer
     meta:
       collection: tapestry
       conditions: null
@@ -3915,11 +3980,11 @@ fields:
     schema:
       name: edition
       table: tapestry
-      data_type: text
+      data_type: integer
       default_value: null
       max_length: null
-      numeric_precision: null
-      numeric_scale: null
+      numeric_precision: 32
+      numeric_scale: 0
       is_nullable: true
       is_unique: false
       is_indexed: false
@@ -4350,27 +4415,147 @@ fields:
     meta:
       collection: tapestry
       conditions: null
-      display: related-values
-      display_options:
-        template: '{{tapestryid.inventorynumber}} – {{pictureid.name}}'
+      display: null
+      display_options: null
       field: pictures
       group: null
       hidden: false
-      interface: list-o2m
+      interface: files
       note: null
       options:
-        enableCreate: true
-        enableSelect: true
+        allowedMimeTypes:
+          - image/*
+        folder: daae1fe9-3867-464a-9c93-9b56b2a8d59a
       readonly: false
       required: false
       searchable: true
       sort: 6
       special:
-        - o2m
+        - files
       translations: null
       validation: null
       validation_message: null
       width: full
+  - collection: tapestry_files
+    field: id
+    type: integer
+    meta:
+      collection: tapestry_files
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: tapestry_files
+      data_type: integer
+      default_value: nextval('tapestry_files_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_indexed: false
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: tapestry_files
+    field: tapestry_id
+    type: integer
+    meta:
+      collection: tapestry_files
+      conditions: null
+      display: null
+      display_options: null
+      field: tapestry_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: tapestry_id
+      table: tapestry_files
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: tapestry
+      foreign_key_column: id
+  - collection: tapestry_files
+    field: directus_files_id
+    type: uuid
+    meta:
+      collection: tapestry_files
+      conditions: null
+      display: null
+      display_options: null
+      field: directus_files_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      searchable: true
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: directus_files_id
+      table: tapestry_files
+      data_type: uuid
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_indexed: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
   - collection: tapestrylocation
     field: id
     type: integer
@@ -4514,7 +4699,7 @@ fields:
       options:
         template: '{{name}}'
       readonly: false
-      required: true
+      required: false
       searchable: true
       sort: null
       special:
@@ -4531,7 +4716,7 @@ fields:
       max_length: null
       numeric_precision: 32
       numeric_scale: 0
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_indexed: true
       is_primary_key: false
@@ -5336,6 +5521,48 @@ relations:
       constraint_name: fk_tapestry_tapestryo_orientat
       on_update: RESTRICT
       on_delete: RESTRICT
+  - collection: tapestry_files
+    field: directus_files_id
+    related_collection: directus_files
+    meta:
+      junction_field: tapestry_id
+      many_collection: tapestry_files
+      many_field: directus_files_id
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: tapestry_files
+      column: directus_files_id
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: tapestry_files_directus_files_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: tapestry_files
+    field: tapestry_id
+    related_collection: tapestry
+    meta:
+      junction_field: directus_files_id
+      many_collection: tapestry_files
+      many_field: tapestry_id
+      one_allowed_collections: null
+      one_collection: tapestry
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: pictures
+      sort_field: null
+    schema:
+      table: tapestry_files
+      column: tapestry_id
+      foreign_key_table: tapestry
+      foreign_key_column: id
+      constraint_name: tapestry_files_tapestry_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: tapestrylocation
     field: locationid
     related_collection: location
@@ -5452,7 +5679,7 @@ relations:
       one_collection: tapestry
       one_collection_field: null
       one_deselect_action: nullify
-      one_field: pictures
+      one_field: null
       sort_field: null
     schema:
       table: tapestrypicture

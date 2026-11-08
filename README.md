@@ -72,6 +72,44 @@ docker compose exec -T directus node cli.js schema apply --yes /tmp/snapshot.yam
 
 > Le CLI Directus s'invoque via `node cli.js ...` dans l'image v12 — `npx` n'y est pas disponible.
 
+## Module métier (`extensions/directus-extension-dewit`)
+
+Les utilisateurs métier travaillent dans le module **DeWit Inventory**, sans jamais voir les collections. Ce bundle contient :
+
+- `src/module` : les écrans (Tapestries, Artists, Catalogs, Business Partners, Sales, Orientations) ;
+- `src/endpoint` : l'API `/dewit/*`, seul accès aux données métier, qui applique les droits et les règles (ventes, historique propriétaire/localisation, surface) en transaction ;
+- `src/hook` : page d'accueil `/dewit` à la création d'un utilisateur.
+
+`dist/` est versionné, car la stack n'a pas d'étape de build. Après une modification :
+
+```bash
+cd extensions/directus-extension-dewit
+npm install
+npm run build
+docker compose restart directus
+```
+
+### Installation
+
+Base issue d'un dump antérieur (`backups/*.dump`) : appliquer la migration puis les rôles. Sur une base créée avec le script SQL à jour, seuls les rôles sont nécessaires.
+
+```bash
+docker compose exec -T database psql -U "$DIRECTUS_DB_USER" -d "$DIRECTUS_DB_NAME" < db/migrations/2026_11_extension_views.sql
+docker compose exec -T database psql -U "$DIRECTUS_DB_USER" -d "$DIRECTUS_DB_NAME" < db/directus_roles.sql
+docker compose restart directus
+```
+
+### Rôles
+
+| | Standard | Manager |
+|---|---|---|
+| Tapisseries | Lecture, salle/sous-localisation si chez DeWit | Gestion complète |
+| Artistes | Lecture, création, modification | + suppression |
+| Catalogues, partenaires | Lecture | Gestion complète |
+| Ventes, orientations | Aucun accès | Gestion complète |
+
+Ces rôles n'ont aucune permission sur les collections métier ; seule exception, `directus_files` pour l'upload et les miniatures. La barre de modules étant globale, Content, Files, Users et Insights y sont masqués pour tous : les administrateurs y accèdent par URL (`/admin/content`, `/admin/files`, `/admin/users`, `/admin/insights`).
+
 ## Injecter une base de backup via Docker
 
 Les backups sont des dumps PostgreSQL au format custom (`pg_dump -F c`), restaurables avec `pg_restore`.
@@ -113,7 +151,7 @@ docker compose cp database:/tmp/backup.dump backups/mon_backup.dump
 
 ## Gestion future des images de tapisseries (`directus_files`)
 
-Pas encore implémenté : aucune photo n'a été importée à ce jour. La table `picture` (`path`, `mimetype`, `name`, `description`, `descriptionauthor`) sert actuellement de placeholder, liée à `tapestry` via `tapestrypicture`.
+Aucune photo n'a été importée à ce jour. Le module métier enregistre déjà les images dans `directus_files` via la table de liaison `tapestry_files`. La table `picture` (`path`, `mimetype`, `name`, `description`, `descriptionauthor`), liée à `tapestry` via `tapestrypicture`, reste un placeholder que l'interface n'utilise pas. Le plan ci-dessous est donc à arbitrer : conserver `tapestry_files`, ou migrer vers `tapestrypicture` pour garder `active`, `dateinformation` et `uv` sur chaque image.
 
 Quand le dossier d'images sera disponible, les fichiers seront gérés par la collection système `directus_files` plutôt que par `picture`, pour bénéficier des miniatures et transformations à la volée, de la gestion des dossiers/permissions et des métadonnées automatiques (dimensions, poids, type MIME). Plan prévu :
 

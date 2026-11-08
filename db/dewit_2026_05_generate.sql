@@ -189,8 +189,9 @@ ID
 create table CATALOGUE (
    ID                   SERIAL               not null,
    NAME                 TEXT                 not null,
-   DATESTART            DATE                 not null,
-   DATEEND              DATE                 not null,
+   YEAR                 INT4                 not null,
+   DATESTART            DATE                 null,
+   DATEEND              DATE                 null,
    constraint PK_CATALOGUE primary key (ID)
 );
 
@@ -389,11 +390,11 @@ create table SALESINFORMATION (
    SELLER               INT4                 not null,
    BUYER                INT4                 null,
    TAPESTRYID           INT4                 not null,
-   MINPRICE             FLOAT8               null,
+   MINPRICE             INT4                 null,
    TRANSACTIONDATE      DATE                 null,
    SALEDATESTART        DATE                 null,
    ACTIVE               BOOL                 not null,
-   TRANSACTIONPRICE     FLOAT8               null,
+   TRANSACTIONPRICE     INT4                 null,
    constraint PK_SALESINFORMATION primary key (ID)
 );
 
@@ -457,25 +458,25 @@ LOCATIONID
 /*==============================================================*/
 create table TAPESTRY (
    ID                   SERIAL               not null,
-   ARTIST               INT4                 not null,
-   ORIENTATION          INT4                 not null,
+   ARTIST               INT4                 null,
+   ORIENTATION          INT4                 null,
    INVENTORYNUMBER      TEXT                 not null,
    TYPE                 TEXT                 null,
-   CENTURY              INT4                 null,
+   CENTURY              TEXT                 null,
    DATE                 DATE                 null,
-   CONSERVATION         INT4                 null,
+   CONSERVATION         TEXT                 null,
    ORIGIN               TEXT                 null,
-   HEIGHT               FLOAT8               null,
-   WIDTH                FLOAT8               null,
-   SURFACE              FLOAT8               null,
-   FRAGMENT             BOOL                 not null,
-   FORSALE              BOOL                 not null,
-   VELCRO               BOOL                 not null,
-   LINING               BOOL                 not null,
-   PRIVATECOLLECTION    BOOL                 not null,
-   DEFINITIVESIZE       BOOL                 not null,
-   LABEL                BOOL                 not null,
-   EDITION              TEXT                 null,
+   HEIGHT               NUMERIC(8,2)         null,
+   WIDTH                NUMERIC(8,2)         null,
+   SURFACE              NUMERIC(10,2)        null,
+   FRAGMENT             BOOL                 null,
+   FORSALE              BOOL                 not null default false,
+   VELCRO               BOOL                 null,
+   LINING               BOOL                 null,
+   PRIVATECOLLECTION    BOOL                 not null default false,
+   DEFINITIVESIZE       BOOL                 null,
+   LABEL                TEXT                 null,
+   EDITION              INT4                 null,
    DESCRIPTIONEN        TEXT                 null,
    DESCRIPTIONNL        TEXT                 null,
    DESCRIPTIONFR        TEXT                 null,
@@ -520,7 +521,7 @@ create table TAPESTRYLOCATION (
    ID                   SERIAL               not null,
    TAPESTRYID           INT4                 not null,
    BUSINESSPARTNERID    INT4                 not null,
-   LOCATIONID           INT4                 not null,
+   LOCATIONID           INT4                 null,
    SUBLOCATIONID        INT4                 null,
    ACTIVE               BOOL                 not null,
    "IN"                 DATE                 null,
@@ -597,6 +598,14 @@ PICTUREID
 create  index TAPESTRYTOPICTURES_FK on TAPESTRYPICTURE (
 TAPESTRYID
 );
+
+create unique index TAPESTRY_INVENTORYNUMBER_UNIQUE on TAPESTRY (INVENTORYNUMBER);
+
+create unique index TAPESTRYLOCATION_ONE_ACTIVE on TAPESTRYLOCATION (TAPESTRYID) where ACTIVE;
+
+create unique index OWNERSHIP_ONE_ACTIVE on OWNERSHIP (TAPESTRYID) where ACTIVE;
+
+create unique index SALESINFORMATION_ONE_ACTIVE on SALESINFORMATION (TAPESTRYID) where ACTIVE;
 
 alter table BPRELATIONSHIP
    add constraint FK_BPRELATI_RELATIONP_BUSINESS foreign key (BUSINESSPARTNERID)
