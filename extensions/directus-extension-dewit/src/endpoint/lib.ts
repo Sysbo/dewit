@@ -20,6 +20,7 @@ export type Tx = { trx: any; items: (collection: string) => any };
 export type Ctx = {
 	db: any;
 	role: Role;
+	isAdmin: boolean;
 	params: Record<string, string>;
 	query: Record<string, any>;
 	body: any;
@@ -58,6 +59,7 @@ export function createRouteFactory({ database, getSchema, services }: any) {
 				const data = await handler({
 					db: database,
 					role,
+					isAdmin: req.accountability.admin === true,
 					params: req.params,
 					query: req.query,
 					body: req.body ?? {},
@@ -126,6 +128,23 @@ export function idList(value: unknown, label: string): number[] {
 
 export function likePattern(search: string): string {
 	return `%${search.replace(/[\\%_]/g, '\\$&')}%`;
+}
+
+// Every word must match one of the searched columns: "unicorn grenier" crosses title and artist.
+export function searchTerms(value: unknown): string[] {
+	return (text(value) ?? '').split(/\s+/).filter(Boolean).slice(0, 8).map(likePattern);
+}
+
+export function optionalId(value: unknown): number | null {
+	const id = Number(value);
+	return Number.isInteger(id) && id > 0 ? id : null;
+}
+
+// `columns` holds trusted SQL expressions; the client only picks a key.
+export function sorting(query: Record<string, any>, columns: Record<string, string>, fallback: string): string {
+	const requested = String(query.sort ?? fallback);
+	const chosen = columns[requested.replace(/^-/, '')] ? requested : fallback;
+	return `${columns[chosen.replace(/^-/, '')]} ${chosen.startsWith('-') ? 'desc' : 'asc'} nulls last`;
 }
 
 export function paging(query: Record<string, any>) {

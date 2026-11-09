@@ -36,7 +36,7 @@ INSERT INTO directus_permissions (collection, action, permissions, validation, p
   ('directus_files', 'read', '{"folder":{"_eq":"daae1fe9-3867-464a-9c93-9b56b2a8d59a"}}', NULL, NULL, '*', 'b2d5f3a1-7c2e-4d4b-9a32-4e6f8b0c1d12');
 
 -- The module bar is global: generic modules are hidden for everyone.
--- Administrators still reach them by URL (/admin/content, /admin/files, /admin/users, /admin/insights).
+-- Administrators reach them from the Administration section of the DeWit module menu.
 UPDATE directus_settings SET module_bar = '[
   {"id": "dewit", "type": "module", "enabled": true},
   {"id": "content", "type": "module", "enabled": false},

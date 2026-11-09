@@ -8,15 +8,17 @@ import {
 	idList,
 	idParam,
 	integer,
-	likePattern,
+	optionalId,
 	notFound,
 	paging,
 	requiredText,
+	searchTerms,
+	sorting,
 	text,
 	type Ctx,
 	type Tx,
 } from './lib';
-import { selfPartnerId, selfRelationTypeId, tapestryLabel } from './domain';
+import { firstPictures, firstTitle, selfPartnerId, selfRelationTypeId, tapestryLabel } from './domain';
 
 async function assertRow(trx: any, table: string, id: number, what: string) {
 	if (!(await trx(table).where({ id }).first())) throw notFound(what);
@@ -29,24 +31,28 @@ const parseArtist = (body: any) => ({ name: requiredText(body.name, 'Artist name
 async function listArtists({ db, query }: Ctx) {
 	const { limit, offset } = paging(query);
 	const base = db('artist as a');
-	const search = text(query.search);
-	if (search) base.where((b: any) => b.whereILike('a.name', likePattern(search)).orWhereILike('a.period', likePattern(search)));
+	for (const term of searchTerms(query.search)) base.where((b: any) => b.whereILike('a.name', term).orWhereILike('a.period', term));
 	const total = await count(base);
 	const items = await base
 		.clone()
 		.select('a.id', 'a.name', 'a.period', db('tapestry as t').count('*').whereRaw('t.artist = a.id').as('tapestries'))
-		.orderBy('a.name')
+		.orderByRaw(sorting(query, { name: 'a.name', period: 'a.period', tapestries: 'tapestries' }, 'name'))
 		.limit(limit)
 		.offset(offset);
 	return { total, items: items.map((row: any) => ({ ...row, tapestries: Number(row.tapestries) })) };
 }
 
+const ARTIST_PREVIEW = 30;
+
 async function getArtist({ db, params }: Ctx) {
 	const id = idParam(params.id, 'Artist');
 	const artist = await db('artist').where({ id }).first();
 	if (!artist) throw notFound('Artist');
-	const tapestries = await db('tapestry').where({ artist: id }).orderBy('inventorynumber');
-	return { ...artist, tapestries: tapestries.map((row: any) => ({ id: row.id, label: tapestryLabel(row) })) };
+	const [tapestries, total] = await Promise.all([
+		db('tapestry').where({ artist: id }).orderBy('inventorynumber').limit(ARTIST_PREVIEW),
+		count(db('tapestry').where({ artist: id })),
+	]);
+	return { ...artist, total, tapestries: tapestries.map((row: any) => ({ id: row.id, label: tapestryLabel(row) })) };
 }
 
 // Catalogs ----------------------------------------------------------------------------------
@@ -60,13 +66,15 @@ function parseCatalog(body: any) {
 async function listCatalogs({ db, query }: Ctx) {
 	const { limit, offset } = paging(query);
 	const base = db('catalogue as c');
-	const search = text(query.search);
-	if (search) base.whereILike('c.name', likePattern(search));
+	for (const term of searchTerms(query.search)) base.whereILike('c.name', term);
+	const year = optionalId(query.year);
+	if (year) base.where('c.year', year);
 	const total = await count(base);
 	const items = await base
 		.clone()
 		.select('c.id', 'c.name', 'c.year', db('cataloguepresence as p').count('*').whereRaw('p.catalogueid = c.id').as('tapestries'))
-		.orderBy([{ column: 'c.year', order: 'desc' }, { column: 'c.name' }])
+		.orderByRaw(sorting(query, { name: 'c.name', year: 'c.year', tapestries: 'tapestries' }, '-year'))
+		.orderBy('c.name')
 		.limit(limit)
 		.offset(offset);
 	return { total, items: items.map((row: any) => ({ ...row, tapestries: Number(row.tapestries) })) };
@@ -81,7 +89,16 @@ async function getCatalog({ db, params }: Ctx) {
 		.where('p.catalogueid', id)
 		.orderBy('t.inventorynumber')
 		.select('t.id', 't.inventorynumber', 't.titlenl', 't.titleen', 't.titlefr');
-	return { ...catalog, tapestries: rows.map((row: any) => ({ id: row.id, label: tapestryLabel(row) })) };
+	const thumbnails = await firstPictures(db, rows.map((row: any) => row.id));
+	return {
+		...catalog,
+		tapestries: rows.map((row: any) => ({
+			id: row.id,
+			inventorynumber: row.inventorynumber,
+			title: firstTitle(row),
+			thumbnail: thumbnails.get(row.id) ?? null,
+		})),
+	};
 }
 
 // Only the difference is written, so catalogprice survives on rows that stay assigned.
@@ -115,13 +132,14 @@ function parsePartner(body: any) {
 async function listPartners({ db, query }: Ctx) {
 	const { limit, offset } = paging(query);
 	const base = db('businesspartner as p');
-	const search = text(query.search);
-	if (search) {
-		const pattern = likePattern(search);
-		base.where((b: any) => b.whereILike('p.name', pattern).orWhereILike('p.addresstown', pattern).orWhereILike('p.addresscountry', pattern));
+	for (const term of searchTerms(query.search)) {
+		base.where((b: any) => b.whereILike('p.name', term).orWhereILike('p.addresstown', term).orWhereILike('p.addresscountry', term));
 	}
+	if (query.active === 'yes' || query.active === 'no') base.where('p.active', query.active === 'yes');
+	const type = optionalId(query.type);
+	if (type) base.whereExists(db('bprelationship as r').select(db.raw('1')).whereRaw('r.businesspartnerid = p.id').where('r.relationtypeid', type));
 	const total = await count(base);
-	const rows = await base.clone().select('p.id', 'p.name', 'p.addresstown', 'p.addresscountry', 'p.active').orderBy('p.name').limit(limit).offset(offset);
+	const rows = await base.clone().select('p.id', 'p.name', 'p.addresstown', 'p.addresscountry', 'p.active').orderByRaw(sorting(query, { name: 'p.name', addresstown: 'p.addresstown', addresscountry: 'p.addresscountry' }, 'name')).limit(limit).offset(offset);
 	const ids = rows.map((row: any) => row.id);
 	const relations = ids.length
 		? await db('bprelationship as r').join('relationtype as t', 't.id', 'r.relationtypeid').whereIn('r.businesspartnerid', ids).select('r.businesspartnerid', 't.name')
@@ -197,23 +215,35 @@ async function listOrientations({ db }: Ctx) {
 
 // Options used by the form dropdowns ---------------------------------------------------------
 
-async function formOptions({ db, role }: Ctx) {
+async function formOptions({ db }: Ctx) {
 	const self = await selfPartnerId(db);
-	const [artists, orientations, partners, locations, sublocations, relationTypes] = await Promise.all([
+	const [artists, orientations, partners, locations, sublocations, relationTypes, centuries, catalogs] = await Promise.all([
 		db('artist').select('id', 'name', 'period').orderBy('name'),
 		db('orientation').select('id', 'name').orderBy('name'),
 		db('businesspartner').select('id', 'name', 'active').orderBy('name'),
 		db('location').where({ bpid: self }).select('id', 'name').orderBy('name'),
 		db('sublocation as s').join('location as l', 'l.id', 's.locationid').where('l.bpid', self).select('s.id', 's.locationid', 's.description').orderBy('s.description'),
-		role === 'manager' ? db('relationtype').whereRaw('lower(name) <> ?', ['self']).select('id', 'name').orderBy('name') : [],
+		db('relationtype').whereRaw('lower(name) <> ?', ['self']).select('id', 'name').orderBy('name'),
+		db('tapestry').whereNotNull('century').distinct('century').orderBy('century'),
+		db('catalogue').select('id', 'name', 'year').orderBy([{ column: 'year', order: 'desc' }, { column: 'name' }]),
 	]);
-	return { selfPartner: self, artists, orientations, partners, locations, sublocations, relationTypes };
+	return {
+		selfPartner: self,
+		artists,
+		orientations,
+		partners,
+		locations,
+		sublocations,
+		relationTypes,
+		catalogs,
+		centuries: centuries.map((row: any) => row.century),
+	};
 }
 
 // Routes --------------------------------------------------------------------------------------
 
 export function registerReferences(router: any, route: any) {
-	router.get('/me', route(ALL_ROLES, async ({ role }: Ctx) => ({ role })));
+	router.get('/me', route(ALL_ROLES, async ({ role, isAdmin }: Ctx) => ({ role, admin: isAdmin })));
 	router.get('/options', route(ALL_ROLES, formOptions));
 
 	router.get('/artists', route(ALL_ROLES, listArtists));
@@ -270,6 +300,19 @@ export function registerReferences(router: any, route: any) {
 			await blockIfUsed(trx, [['cataloguepresence', 'catalogueid', 'tapestries']], id);
 			await items('catalogue').deleteOne(id);
 			return { id };
+		});
+	}));
+
+	router.post('/catalogs/:id/tapestries', route(MANAGER_ONLY, async ({ params, body, tx }: Ctx) => {
+		const id = idParam(params.id, 'Catalog');
+		const ids = idList(body.ids, 'Tapestries');
+		return tx(async ({ trx, items }) => {
+			await assertRow(trx, 'catalogue', id, 'Catalog');
+			const known = (await trx('tapestry').whereIn('id', ids).select('id')).map((row: any) => row.id);
+			const present = (await trx('cataloguepresence').where({ catalogueid: id }).whereIn('tapestryid', ids)).map((row: any) => row.tapestryid);
+			const missing = known.filter((tapestryid: number) => !present.includes(tapestryid));
+			for (const tapestryid of missing) await items('cataloguepresence').createOne({ catalogueid: id, tapestryid });
+			return { added: missing.length, alreadyPresent: present.length };
 		});
 	}));
 

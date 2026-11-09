@@ -1,11 +1,13 @@
 import { defineModule } from '@directus/extensions-sdk';
 import ArtistDetail from './pages/ArtistDetail.vue';
 import CatalogDetail from './pages/CatalogDetail.vue';
-import { ArtistList, CatalogList, OrientationList, PartnerList, TapestryList } from './pages/Lists';
+import { ArtistList, CatalogList, OrientationList, PartnerList } from './pages/Lists';
 import OrientationDetail from './pages/OrientationDetail.vue';
 import PartnerDetail from './pages/PartnerDetail.vue';
-import Sales from './pages/Sales.vue';
+import SaleDetail from './pages/SaleDetail.vue';
+import SalesList from './pages/SalesList.vue';
 import TapestryDetail from './pages/TapestryDetail.vue';
+import TapestryList from './pages/TapestryList.vue';
 
 export default defineModule({
 	id: 'dewit',
@@ -23,6 +25,7 @@ export default defineModule({
 		{ path: 'partners/:id', component: PartnerDetail, props: true },
 		{ path: 'orientations', component: OrientationList },
 		{ path: 'orientations/:id', component: OrientationDetail, props: true },
-		{ path: 'sales', component: Sales },
+		{ path: 'sales', component: SalesList },
+		{ path: 'sales/:tapestryId', component: SaleDetail, props: true },
 	],
 });

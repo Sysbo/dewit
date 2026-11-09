@@ -18,6 +18,20 @@ export function tapestryLabel(row: { inventorynumber: string; titlenl?: string; 
 	return titles ? `${row.inventorynumber} – ${titles}` : row.inventorynumber;
 }
 
+export const firstTitle = (row: { titlenl?: string; titleen?: string; titlefr?: string }) =>
+	row.titlenl || row.titleen || row.titlefr || '';
+
+export async function firstPictures(db: any, tapestryIds: number[]): Promise<Map<number, string>> {
+	if (!tapestryIds.length) return new Map();
+	const rows = await db('tapestry_files')
+		.whereIn('tapestry_id', tapestryIds)
+		.whereNotNull('directus_files_id')
+		.distinctOn('tapestry_id')
+		.orderBy([{ column: 'tapestry_id' }, { column: 'id' }])
+		.select('tapestry_id', 'directus_files_id');
+	return new Map(rows.map((row: any) => [row.tapestry_id, row.directus_files_id]));
+}
+
 function selfQuery(db: any) {
 	return db('businesspartner as p')
 		.join('bprelationship as r', 'r.businesspartnerid', 'p.id')

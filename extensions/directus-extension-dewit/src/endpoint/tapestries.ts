@@ -9,12 +9,15 @@ import {
 	decimal,
 	ensureExists,
 	forbidden,
+	idList,
 	idParam,
 	integer,
-	likePattern,
+	optionalId,
 	notFound,
 	paging,
 	requiredText,
+	searchTerms,
+	sorting,
 	text,
 	triState,
 	type Ctx,
@@ -24,10 +27,11 @@ import {
 	applyLocation,
 	applyOwner,
 	dateString,
+	firstPictures,
+	firstTitle,
 	numberOrNull,
 	resolveLocation,
 	selfPartnerId,
-	tapestryLabel,
 } from './domain';
 
 const TEXT_FIELDS = [
@@ -109,30 +113,78 @@ async function assertReferences(trx: any, columns: Record<string, unknown>) {
 	await ensureExists(trx, 'orientation', columns.orientation as number | null, 'Orientation');
 }
 
-async function list({ db, query }: Ctx) {
-	const { page, limit, offset } = paging(query);
-	const self = await selfPartnerId(db);
-	const base = db('tapestry as t')
-		.leftJoin('artist as a', 'a.id', 't.artist')
-		.leftJoin('tapestrylocation as l', function (this: any) {
-			this.on('l.tapestryid', 't.id').andOn(db.raw('l.active = true'));
-		})
-		.leftJoin('businesspartner as p', 'p.id', 'l.businesspartnerid')
-		.leftJoin('location as r', 'r.id', 'l.locationid');
+const ACTIVE_LOCATION = 'x.tapestryid = t.id and x.active';
 
-	const search = text(query.search);
-	if (search) {
-		const pattern = likePattern(search);
+function applyFilters(db: any, base: any, query: Record<string, any>, role: string, self: number) {
+	for (const term of searchTerms(query.search)) {
 		base.where((b: any) => {
-			for (const column of ['t.inventorynumber', 't.titlenl', 't.titleen', 't.titlefr', 'a.name']) {
-				b.orWhereILike(column, pattern);
-			}
+			for (const column of ['t.inventorynumber', 't.titlenl', 't.titleen', 't.titlefr', 'a.name']) b.orWhereILike(column, term);
 		});
 	}
+
+	const artist = optionalId(query.artist);
+	if (artist) base.where('t.artist', artist);
+	const orientation = optionalId(query.orientation);
+	if (orientation) base.where('t.orientation', orientation);
+	const century = text(query.century);
+	if (century) base.where('t.century', century);
+	if (query.private === 'yes' || query.private === 'no') base.where('t.privatecollection', query.private === 'yes');
+	if (role === 'manager' && (query.forsale === 'yes' || query.forsale === 'no')) base.where('t.forsale', query.forsale === 'yes');
+
+	const related = (table: string, condition: string, extra?: (q: any) => void) => (q: any) => {
+		q.select(db.raw('1')).from(`${table} as x`).whereRaw(condition);
+		extra?.(q);
+	};
+
+	const catalog = optionalId(query.catalog);
+	if (catalog) base.whereExists(related('cataloguepresence', 'x.tapestryid = t.id', (q) => q.where('x.catalogueid', catalog)));
+	if (query.pictures === 'yes') base.whereExists(related('tapestry_files', 'x.tapestry_id = t.id'));
+	if (query.pictures === 'no') base.whereNotExists(related('tapestry_files', 'x.tapestry_id = t.id'));
+	const owner = optionalId(query.owner);
+	if (owner) base.whereExists(related('ownership', ACTIVE_LOCATION, (q) => q.where('x.ownerid', owner)));
+
+	const location = text(query.location);
+	if (location === 'unknown') {
+		base.whereNotExists(related('tapestrylocation', ACTIVE_LOCATION));
+	} else if (location) {
+		const [kind, raw] = location.split(':');
+		const id = optionalId(raw);
+		base.whereExists(
+			related('tapestrylocation', ACTIVE_LOCATION, (q) => {
+				if (kind === 'dewit') q.where('x.businesspartnerid', self);
+				if (kind === 'partner' && id) q.where('x.businesspartnerid', id);
+				if (kind === 'room' && id) {
+					q.where({ 'x.businesspartnerid': self, 'x.locationid': id });
+					const sublocation = optionalId(query.sublocation);
+					if (sublocation) q.where('x.sublocationid', sublocation);
+				}
+			}),
+		);
+	}
+}
+
+const SORT_COLUMNS = {
+	inventorynumber: 't.inventorynumber',
+	title: "coalesce(nullif(t.titlenl, ''), nullif(t.titleen, ''), nullif(t.titlefr, ''))",
+	artist: 'a.name',
+	century: 't.century',
+	location: 'location_label',
+};
+
+async function list({ db, query, role }: Ctx) {
+	const { limit, offset } = paging(query);
+	const self = await selfPartnerId(db);
+	const base = db('tapestry as t').leftJoin('artist as a', 'a.id', 't.artist');
+	applyFilters(db, base, query, role, self);
 
 	const total = await count(base);
 	const rows = await base
 		.clone()
+		.leftJoin('tapestrylocation as l', function (this: any) {
+			this.on('l.tapestryid', 't.id').andOn(db.raw('l.active = true'));
+		})
+		.leftJoin('businesspartner as p', 'p.id', 'l.businesspartnerid')
+		.leftJoin('location as r', 'r.id', 'l.locationid')
 		.select(
 			't.id',
 			't.inventorynumber',
@@ -140,26 +192,93 @@ async function list({ db, query }: Ctx) {
 			't.titleen',
 			't.titlefr',
 			't.century',
+			't.forsale',
 			'a.name as artist',
 			'l.businesspartnerid as bp',
-			'p.name as partner',
-			'r.name as room',
+			db.raw('case when l.businesspartnerid = ? and r.name is not null then r.name else p.name end as location_label', [self]),
 		)
-		.orderBy('t.inventorynumber')
+		.orderByRaw(sorting(query, SORT_COLUMNS, 'inventorynumber'))
+		.orderBy('t.id')
 		.limit(limit)
 		.offset(offset);
 
+	const thumbnails = await firstPictures(db, rows.map((row: any) => row.id));
 	return {
 		total,
 		items: rows.map((row: any) => ({
 			id: row.id,
 			inventorynumber: row.inventorynumber,
-			title: [row.titlenl, row.titleen, row.titlefr].filter(Boolean).join(' / '),
+			title: firstTitle(row),
+			titles: [row.titlenl, row.titleen, row.titlefr].filter(Boolean).join(' / '),
 			artist: row.artist,
 			century: row.century,
-			location: row.bp === self && row.room ? row.room : row.partner,
+			location: row.location_label,
+			atDewit: row.bp === self,
+			thumbnail: thumbnails.get(row.id) ?? null,
+			...(role === 'manager' ? { forsale: row.forsale } : {}),
 		})),
 	};
+}
+
+async function activity({ db, params, role }: Ctx) {
+	const id = idParam(params.id, 'Tapestry');
+	const self = await selfPartnerId(db);
+	const [locations, owners, catalogs] = await Promise.all([
+		db('tapestrylocation as l')
+			.leftJoin('businesspartner as p', 'p.id', 'l.businesspartnerid')
+			.leftJoin('location as r', 'r.id', 'l.locationid')
+			.leftJoin('sublocation as s', 's.id', 'l.sublocationid')
+			.where('l.tapestryid', id)
+			.orderBy('l.id', 'desc')
+			.select('l.id', 'l.active', 'l.IN as start', 'l.out as end', 'l.businesspartnerid as bp', 'p.name as partner', 'r.name as room', 's.description as sub'),
+		db('ownership as o')
+			.leftJoin('businesspartner as p', 'p.id', 'o.ownerid')
+			.where('o.tapestryid', id)
+			.orderBy('o.id', 'desc')
+			.select('o.id', 'o.active', 'o.datestart as start', 'o.dateend as end', 'p.name as owner'),
+		db('cataloguepresence as c')
+			.join('catalogue as g', 'g.id', 'c.catalogueid')
+			.where('c.tapestryid', id)
+			.orderBy('g.year', 'desc')
+			.select('g.id', 'g.name', 'g.year'),
+	]);
+	const forsale = role === 'manager' ? (await db('tapestry').where({ id }).first('forsale'))?.forsale : undefined;
+	return {
+		forsale,
+		catalogs,
+		locations: locations.map((row: any) => ({
+			id: row.id,
+			active: row.active,
+			start: dateString(row.start),
+			end: dateString(row.end),
+			label: row.bp === self && row.room ? [row.room, row.sub].filter(Boolean).join(' · ') : row.partner,
+		})),
+		owners: owners.map((row: any) => ({ ...row, start: dateString(row.start), end: dateString(row.end) })),
+	};
+}
+
+// A shelf or a room is often moved as a whole. Standard users only move what is stored at DeWit.
+async function bulkLocation({ body, role, tx }: Ctx) {
+	const ids = idList(body.ids, 'Tapestries');
+	if (!ids.length || ids.length > 500) throw badRequest('Select between 1 and 500 tapestries');
+	return tx(async (t) => {
+		const self = await selfPartnerId(t.trx);
+		const bp = role === 'manager' ? (integer(body.locationbp, 'Location owner') ?? self) : self;
+		const location = integer(body.location, 'Location');
+		if (bp === self && location === null) throw badRequest('Select a location');
+		const target = await resolveLocation(t.trx, self, bp, location, integer(body.sublocation, 'Sub-location'));
+
+		const known = await t.trx('tapestry').whereIn('id', ids).select('id');
+		const active = await t.trx('tapestrylocation').whereIn('tapestryid', ids).where({ active: true });
+		const currentBp = new Map(active.map((row: any) => [row.tapestryid, row.businesspartnerid]));
+		let moved = 0;
+		for (const { id } of known) {
+			if (role !== 'manager' && currentBp.get(id) !== self) continue;
+			await applyLocation(t, id, target, self);
+			moved++;
+		}
+		return { moved, skipped: ids.length - moved };
+	});
 }
 
 async function detail({ db, params }: Ctx) {
@@ -266,17 +385,13 @@ async function remove({ params, tx }: Ctx) {
 	});
 }
 
-async function options({ db }: Ctx) {
-	const rows = await db('tapestry').select('id', 'inventorynumber', 'titlenl', 'titleen', 'titlefr').orderBy('inventorynumber');
-	return rows.map((row: any) => ({ id: row.id, label: tapestryLabel(row) }));
-}
-
 export function registerTapestries(router: any, route: any) {
 	router.get('/tapestries', route(ALL_ROLES, list));
 	router.post('/tapestries', route(MANAGER_ONLY, create));
+	router.post('/tapestries/bulk/location', route(ALL_ROLES, bulkLocation));
 	router.get('/tapestries/:id', route(ALL_ROLES, detail));
+	router.get('/tapestries/:id/activity', route(ALL_ROLES, activity));
 	router.patch('/tapestries/:id', route(MANAGER_ONLY, update));
 	router.patch('/tapestries/:id/location', route(ALL_ROLES, updateInternalLocation));
 	router.delete('/tapestries/:id', route(MANAGER_ONLY, remove));
-	router.get('/options/tapestries', route(MANAGER_ONLY, options));
 }

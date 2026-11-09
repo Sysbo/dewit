@@ -80,6 +80,8 @@ Les utilisateurs métier travaillent dans le module **DeWit Inventory**, sans ja
 - `src/endpoint` : l'API `/dewit/*`, seul accès aux données métier, qui applique les droits et les règles (ventes, historique propriétaire/localisation, surface) en transaction ;
 - `src/hook` : page d'accueil `/dewit` à la création d'un utilisateur.
 
+Les vues sont conçues pour un inventaire volumineux : recherche multi-mots, filtres, tri et pagination côté serveur (état conservé dans l'URL), vignettes et vue images, déplacement et ajout à un catalogue par lot, navigation précédent/suivant entre les fiches, sélecteur de tapisseries avec recherche.
+
 `dist/` est versionné, car la stack n'a pas d'étape de build. Après une modification :
 
 ```bash
@@ -91,11 +93,12 @@ docker compose restart directus
 
 ### Installation
 
-Base issue d'un dump antérieur (`backups/*.dump`) : appliquer la migration puis les rôles. Sur une base créée avec le script SQL à jour, seuls les rôles sont nécessaires.
+Base issue d'un dump antérieur (`backups/*.dump`) : appliquer la migration, les rôles et l'index. Sur une base créée avec le script SQL à jour, la première commande n'est pas nécessaire. L'index se pose après l'application du snapshot.
 
 ```bash
 docker compose exec -T database psql -U "$DIRECTUS_DB_USER" -d "$DIRECTUS_DB_NAME" < db/migrations/2026_11_extension_views.sql
 docker compose exec -T database psql -U "$DIRECTUS_DB_USER" -d "$DIRECTUS_DB_NAME" < db/directus_roles.sql
+docker compose exec -T database psql -U "$DIRECTUS_DB_USER" -d "$DIRECTUS_DB_NAME" < db/migrations/2026_11_list_indexes.sql
 docker compose restart directus
 ```
 
@@ -108,7 +111,7 @@ docker compose restart directus
 | Catalogues, partenaires | Lecture | Gestion complète |
 | Ventes, orientations | Aucun accès | Gestion complète |
 
-Ces rôles n'ont aucune permission sur les collections métier ; seule exception, `directus_files` pour l'upload et les miniatures. La barre de modules étant globale, Content, Files, Users et Insights y sont masqués pour tous : les administrateurs y accèdent par URL (`/admin/content`, `/admin/files`, `/admin/users`, `/admin/insights`).
+Ces rôles n'ont aucune permission sur les collections métier ; seule exception, `directus_files` pour l'upload et les miniatures. La barre de modules étant globale, Content, Files, Users et Insights y sont masqués pour tous : les administrateurs y accèdent depuis la section **Administration** du menu du module DeWit.
 
 ## Injecter une base de backup via Docker
 
